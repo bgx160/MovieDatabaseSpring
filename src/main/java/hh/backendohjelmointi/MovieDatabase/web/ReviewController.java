@@ -3,6 +3,7 @@ package hh.backendohjelmointi.MovieDatabase.web;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,6 +49,7 @@ public class ReviewController {
 	}
 	
 	@GetMapping("/review/delete/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteReview(@PathVariable("id") Long id) {
 		reviewRepository.deleteById(id);
 		return "redirect:/movielist";
