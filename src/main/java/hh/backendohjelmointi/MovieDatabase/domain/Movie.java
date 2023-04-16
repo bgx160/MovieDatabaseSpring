@@ -57,14 +57,6 @@ public class Movie {
 		this.year = year;
 	}
 	
-//	public Movie(String title, String director, int year, Set<Genre> genres) {
-//		super();
-//		this.title = title;
-//		this.director = director;
-//		this.year = year;
-//		this.genres = genres;
-//	}
-
 	public String getTitle() {
 		return title;
 	}
