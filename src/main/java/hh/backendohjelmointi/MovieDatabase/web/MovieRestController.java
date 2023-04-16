@@ -16,27 +16,27 @@ import hh.backendohjelmointi.MovieDatabase.domain.MovieRepository;
 
 @RestController
 public class MovieRestController {
-	
+
 	@Autowired
 	private MovieRepository movieRepository;
-	
+
 	@GetMapping("/movies")
 	public List<Movie> movielist() {
 		return (List<Movie>) movieRepository.findAll();
 	}
-	
+
 	@GetMapping("/movies/{id}")
 	public Optional<Movie> movieById(@PathVariable("id") Long id) {
 		return (Optional<Movie>) movieRepository.findById(id);
 	}
-	
+
 	@PostMapping("/movies")
 	public Movie addMovie(@RequestBody Movie movie) {
-		return movieRepository.save(movie);	
+		return movieRepository.save(movie);
 	}
 
 	@DeleteMapping("/movies/{id}")
 	public void deleteMovie(@PathVariable Long id) {
-		movieRepository.deleteById(id);	
+		movieRepository.deleteById(id);
 	}
 }
