@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import hh.backendohjelmointi.MovieDatabase.web.UserDetailServiceImpl;
-import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;  
 
 
 
@@ -22,10 +21,8 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests()
-        .requestMatchers("/index", "/css/**", "/signup", "/saveuser").permitAll()
-        .requestMatchers(toH2Console()).permitAll()
-        .and().csrf().ignoringRequestMatchers(toH2Console())
-        .and().formLogin().defaultSuccessUrl("/index", true)
+        .requestMatchers("/", "/css/**", "/signup", "/saveuser").permitAll()
+        .and().formLogin().defaultSuccessUrl("/", true)
         .and().httpBasic().and().authorizeHttpRequests().anyRequest().authenticated().and().formLogin().permitAll().and().logout()
 				.permitAll().and().httpBasic();
 		http.headers().frameOptions().disable();
