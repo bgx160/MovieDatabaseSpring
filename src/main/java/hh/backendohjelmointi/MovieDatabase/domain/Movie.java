@@ -24,25 +24,23 @@ public class Movie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long movieId;
-	
+
 	@Column(name = "`year`")
 	@Min(value = 1888, message = "must be atleast 1888")
 	private int year;
 
 	@JsonIgnoreProperties("movies")
 	@ManyToMany
-	@JoinTable(name = "movie_genre",
-	joinColumns = @JoinColumn(name = "movieId"),
-	inverseJoinColumns = @JoinColumn(name = "genreId"))
+	@JoinTable(name = "movie_genre", joinColumns = @JoinColumn(name = "movieId"), inverseJoinColumns = @JoinColumn(name = "genreId"))
 	private Set<Genre> genres = new HashSet<>();
 
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
 	private Set<Review> reviews = new HashSet<>();
-	
+
 	@NotEmpty(message = "movie must have a title")
 	private String title;
-	
+
 	@NotEmpty(message = "movie must have a director")
 	private String director;
 
@@ -56,7 +54,7 @@ public class Movie {
 		this.director = director;
 		this.year = year;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
@@ -121,15 +119,6 @@ public class Movie {
 
 	public void removeReview(Review review) {
 		this.reviews.remove(review);
-	}
-
-	@Override
-	public String toString() {
-		String str = "";
-		for (Genre genre : genres) {
-			str += genre.getName() + " ";
-		}
-		return str;
 	}
 
 }
