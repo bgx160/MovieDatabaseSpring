@@ -19,13 +19,13 @@ public class Genre {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long genreId;
-	
+
 	@NotEmpty
 	private String name;
-	
+
 	@ManyToMany(mappedBy = "genres")
 	private Set<Movie> movies = new HashSet<>();
-	
+
 	@JsonIgnoreProperties("genres")
 	public Set<Movie> getMovies() {
 		return movies;
@@ -43,7 +43,6 @@ public class Genre {
 	public String getName() {
 		return name;
 	}
-
 
 	public Long getGenreId() {
 		return genreId;
