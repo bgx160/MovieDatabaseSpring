@@ -83,7 +83,7 @@ public class MovieController {
 		}
 	}
 
-	// save new movie, if movie has validation errors returns edit movie form
+	// save edited movie, if movie has validation errors returns edit movie form
 	@PostMapping("/editmovie")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String editMovie(@Valid Movie movie, BindingResult result, Model m) {
