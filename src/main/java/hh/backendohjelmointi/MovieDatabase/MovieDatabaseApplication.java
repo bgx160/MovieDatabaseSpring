@@ -5,6 +5,8 @@ package hh.backendohjelmointi.MovieDatabase;
 
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,6 +23,8 @@ import hh.backendohjelmointi.MovieDatabase.domain.UserRepository;
 
 @SpringBootApplication
 public class MovieDatabaseApplication {
+	
+	private static final Logger log = LoggerFactory.getLogger(MovieDatabaseApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(MovieDatabaseApplication.class, args);
@@ -30,6 +34,7 @@ public class MovieDatabaseApplication {
 	@Bean
 	public CommandLineRunner demo(MovieRepository movieRepository, GenreRepository genreRepository, ReviewRepository reviewRepository, UserRepository userRepository) {
 		return (args) -> {
+			log.info("Save a small test data");
 			Genre genre1 = genreRepository.save(new Genre("Animation"));
 			Genre genre2 = genreRepository.save(new Genre("Adventure"));
 			Genre genre3 = genreRepository.save(new Genre("Drama"));
