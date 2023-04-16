@@ -24,7 +24,7 @@ public class MovieController {
 	@Autowired
 	private GenreRepository genreRepository;
 
-	@GetMapping("/index")
+	@GetMapping("/")
 	public String welcome() {
 		return "index";
 	}
