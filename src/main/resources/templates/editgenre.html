@@ -4,9 +4,7 @@
 <head>
 <title>Movie Database</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="/css/styles.css"
 	th:href="@{/css/styles.css}" />
 </head>
@@ -26,26 +24,21 @@
 			</ul>
 		</nav>
 	</header>
-	<h1>Genres</h1>
-	<div sec:authorize="hasAuthority('ADMIN')"
-		style="position: static; text-align: right;">
-		<a th:href="@{/newgenre}">Add a genre</a>
+	<div class="form-control">
+	<h1>Edit a movie</h1>
+	<form action="#" th:object="${genre}" th:action="@{/editgenre}" method="post">
+		<input type="hidden" th:field="*{genreId}">
+  		<label>Title:</label><br>
+  			<input type="text" th:field="*{name}"><br>
+  			<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" >Title error</p>	
+  			<input class="btn btn-success" type="submit" value="Save">
+  			<a class="btn btn-danger" th:href="@{/movielist}">Go back</a>
+	</form> 
 	</div>
-	<table class="table table-striped">
-		<tr>
-			<th>Name</th>
-			<th>Movies</th>
-			<th sec:authorize="hasAuthority('ADMIN')">
-		</tr>
-		<tr th:each="genre : ${genres}">
-			<td th:text=${genre.name}></td>
-			<td><a th:href="@{/movielist/{genre}(genre=${genre.name})}">Movies</a></td>
-			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/genre/delete/{id}(id=${genre.genreId})}">Delete</a></td>
-			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/genre/edit/{id}(id=${genre.genreId})}">Edit</a></td>
-			
-			
-		</tr>
-	</table>
 
 </body>
 </html>
+
+
+
+

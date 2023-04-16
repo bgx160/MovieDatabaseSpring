@@ -34,6 +34,13 @@ public class GenreController {
 		m.addAttribute("genre", new Genre());
 		return "addgenre";
 	}
+	
+	@GetMapping("/genre/edit/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public String editGenre(@PathVariable Long id, Model m) {
+		m.addAttribute("genre", genreRepository.findById(id));
+		return "editgenre";
+	}
 
 	@GetMapping("genre/delete/{id}")
 	@PreAuthorize("hasAuthority('ADMIN')")
@@ -49,14 +56,28 @@ public class GenreController {
 		return "redirect:/genrelist";
 	}
 
+	// save new genre, if genre has validation errors returns new genre form
 	@PostMapping("/savegenre")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String saveGenre(@Valid Genre genre, BindingResult result) {
 		if (!result.hasErrors()) {
 			genreRepository.save(genre);
-			return "redirect:/genrelist"; // TODO: redirect last page
+			return "redirect:/genrelist";
 		} else {
 			return "redirect:/newgenre";
+		}
+
+	}
+	
+	// save edited genre, if genre has validation errors returns edit genre form
+	@PostMapping("/editgenre")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public String editGenre(@Valid Genre genre, BindingResult result) {
+		if (!result.hasErrors()) {
+			genreRepository.save(genre);
+			return "redirect:/genrelist";
+		} else {
+			return "redirect:/editgenre";
 		}
 
 	}
