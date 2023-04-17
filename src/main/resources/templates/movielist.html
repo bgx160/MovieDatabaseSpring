@@ -52,7 +52,6 @@
 			<td th:text=${movie.year}></td>
 			<td><span th:each="genre : ${movie.genres}" th:text="${genre.name} + ' '"></span></td>
 			<td><a th:href="@{/reviews/{id}(id=${movie.movieId})}" th:text="${#numbers.formatDecimal(#aggregates.avg(movie.reviews.![rating]), 1, 2, 'POINT')}" /></a></td>
-			<!--  <td th:if="${#sets.isEmpty(movie.reviews.![rating])}">No reviews</td>-->
 			<td sec:authorize="isAuthenticated()"><a th:href="@{/newreview/{id}(id=${movie.movieId})}">Write a review</a></td>
 			
 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/movie/delete/{id}(id=${movie.movieId})}">Delete</a></td>
