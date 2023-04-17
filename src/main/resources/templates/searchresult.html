@@ -43,7 +43,7 @@
 			<td th:text=${movie.title}></td>
 			<td th:text=${movie.director}></td>
 			<td th:text=${movie.year}></td>
-			<td th:text=${movie.toString}></td>
+			<td><span th:each="genre : ${movie.genres}" th:text="${genre.name} + ' '"></span></td>
 			<td> <a th:href="@{/reviews/{id}(id=${movie.movieId})}" th:text="${#numbers.formatDecimal(#aggregates.avg(movie.reviews.![rating]), 1, 2, 'POINT')}" /></a></td>
 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${movie.movieId})}">Delete</a></td>
 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${movie.movieId})}">Edit</a></td>
